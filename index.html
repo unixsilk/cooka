@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cooka - Simple Cooking</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page="home">
+    <header class="site-header">
+      <div class="brand">
+        <a href="index.html" data-link="index.html" class="logo" data-i18n="site_name">Cooka</a>
+      </div>
+      <div class="header-actions">
+        <nav class="nav">
+          <a href="index.html" data-link="index.html" data-i18n="nav_home" class="active">Home</a>
+          <a href="recipes.html" data-link="recipes.html" data-i18n="nav_recipes">Recipes</a>
+        </nav>
+        <div class="header-right">
+          <button id="theme-toggle" class="nav-btn" type="button" aria-label="Switch theme">🎨</button>
+          <div class="lang-switch">
+          <select id="lang-select" aria-label="Language">
+            <option value="de">🇨🇭</option>
+            <option value="tr">🇹🇷</option>
+            <option value="sq">🇦🇱</option>
+          </select>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="content">
+      <section class="hero">
+        <h1 data-i18n="hero_title">Cooking made calm and easy.</h1>
+        <p data-i18n="hero_body">
+          A tiny, multi-page cooking site built for GitHub Pages. Use demo
+          recipes or connect Supabase for real data.
+        </p>
+        <a class="button" href="recipes.html" data-link="recipes.html" data-i18n="hero_cta">Browse recipes</a>
+      </section>
+
+      <section class="grid">
+        <div class="card">
+          <h2 data-i18n="feature_fast_title">Fast</h2>
+          <p data-i18n="feature_fast_body">Static pages that load quickly and work anywhere.</p>
+        </div>
+        <div class="card">
+          <h2 data-i18n="feature_simple_title">Simple</h2>
+          <p data-i18n="feature_simple_body">No build step, no dependencies, no drama.</p>
+        </div>
+        <div class="card">
+          <h2 data-i18n="feature_flexible_title">Flexible</h2>
+          <p data-i18n="feature_flexible_body">Plug in Supabase later without changing the layout.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span data-i18n="footer_brand">Cooka</span>
+      <span data-i18n="footer_note">Built for GitHub Pages + Supabase</span>
+    </footer>
+    <script src="js/app.js"></script>
+  </body>
+</html>

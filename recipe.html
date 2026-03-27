@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cooka - Recipe</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page="recipe">
+    <header class="site-header">
+      <div class="brand">
+        <a href="index.html" data-link="index.html" class="logo" data-i18n="site_name">Cooka</a>
+      </div>
+      <div class="header-actions">
+        <nav class="nav">
+          <a href="index.html" data-link="index.html" data-i18n="nav_home">Home</a>
+          <a href="recipes.html" data-link="recipes.html" data-i18n="nav_recipes">Recipes</a>
+        </nav>
+        <div class="header-right">
+          <button id="theme-toggle" class="nav-btn" type="button" aria-label="Switch theme">🎨</button>
+          <div class="lang-switch">
+          <select id="lang-select" aria-label="Language">
+            <option value="de">🇨🇭</option>
+            <option value="tr">🇹🇷</option>
+            <option value="sq">🇦🇱</option>
+          </select>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="content">
+      <div id="recipe-detail" class="detail"></div>
+      <div class="back-link">
+        <a href="recipes.html" data-link="recipes.html" data-i18n="back_to_recipes">Back to recipes</a>
+      </div>
+      <div id="data-note" class="note"></div>
+    </main>
+
+    <footer class="site-footer">
+      <span data-i18n="footer_brand">Cooka</span>
+      <span data-i18n="footer_note">Built for GitHub Pages + Supabase</span>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/data.js"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

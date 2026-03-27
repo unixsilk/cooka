@@ -474,20 +474,23 @@ function scaleIngredient(text, factor) {
 async function loadRecipes() {
   const note = document.getElementById("data-note");
   const client = typeof getSupabaseClient === "function" ? getSupabaseClient() : null;
+  const onlyWithImages = (recipes) => recipes.filter((recipe) => recipe && recipe.image_url);
 
   if (!client) {
     if (note) note.textContent = t("data_demo");
-    return typeof DEMO_RECIPES !== "undefined" ? DEMO_RECIPES : [];
+    const demo = typeof DEMO_RECIPES !== "undefined" ? DEMO_RECIPES : [];
+    return onlyWithImages(demo);
   }
 
   const { data, error } = await client.from("recipes").select("*").order("title");
   if (error || !data) {
     if (note) note.textContent = t("data_error");
-    return typeof DEMO_RECIPES !== "undefined" ? DEMO_RECIPES : [];
+    const demo = typeof DEMO_RECIPES !== "undefined" ? DEMO_RECIPES : [];
+    return onlyWithImages(demo);
   }
 
   if (note) note.textContent = t("data_supabase");
-  return data;
+  return onlyWithImages(data);
 }
 
 function renderRecipeList(recipes) {

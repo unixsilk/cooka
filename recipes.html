@@ -33,6 +33,51 @@
     <main class="content">
       <h1 class="page-title" data-i18n="recipes_title">Recipes</h1>
       <p class="muted" data-i18n="recipes_sub">Pick a recipe to view details.</p>
+      <section class="filters" id="recipe-filters">
+        <div class="filter-row">
+          <label class="filter-field">
+            <span data-i18n="filter_search">Search</span>
+            <input
+              id="recipe-search"
+              type="search"
+              data-i18n-placeholder="filter_search_placeholder"
+              placeholder="Search recipes"
+            />
+          </label>
+          <label class="filter-field">
+            <span data-i18n="filter_meal">Meal</span>
+            <select id="filter-meal"></select>
+          </label>
+          <label class="filter-field">
+            <span data-i18n="filter_cuisine">Cuisine</span>
+            <select id="filter-cuisine"></select>
+          </label>
+          <label class="filter-field">
+            <span data-i18n="filter_diet">Diet</span>
+            <select id="filter-diet"></select>
+          </label>
+          <label class="filter-field">
+            <span data-i18n="filter_category">Category</span>
+            <select id="filter-category"></select>
+          </label>
+          <label class="filter-field">
+            <span data-i18n="filter_time">Time</span>
+            <select id="filter-time"></select>
+          </label>
+          <label class="filter-field">
+            <span data-i18n="filter_difficulty">Difficulty</span>
+            <select id="filter-difficulty"></select>
+          </label>
+          <label class="filter-field">
+            <span data-i18n="filter_ingredient">Ingredient</span>
+            <select id="filter-ingredient"></select>
+          </label>
+        </div>
+        <div class="filter-actions">
+          <button class="button ghost" id="filter-clear" type="button" data-i18n="filter_clear">Clear</button>
+          <span class="filter-count" id="filter-count"></span>
+        </div>
+      </section>
       <div id="recipe-list" class="grid"></div>
       <div id="data-note" class="note"></div>
     </main>

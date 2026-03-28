@@ -52,7 +52,19 @@ const I18N = {
     comment_rating: "Bewertung",
     comment_text: "Kommentar",
     comment_submit: "Absenden",
-    comment_empty: "Noch keine Kommentare."
+    comment_empty: "Noch keine Kommentare.",
+    filter_search: "Suche",
+    filter_search_placeholder: "Rezept, Zutat oder Tag",
+    filter_meal: "Gang",
+    filter_cuisine: "Küche",
+    filter_diet: "Ernährung",
+    filter_category: "Kategorie",
+    filter_time: "Zeit",
+    filter_difficulty: "Schwierigkeit",
+    filter_ingredient: "Zutat",
+    filter_all: "Alle",
+    filter_clear: "Zurücksetzen",
+    filter_results: "Ergebnisse"
   },
   tr: {
     titles: {
@@ -107,7 +119,19 @@ const I18N = {
     comment_rating: "Puan",
     comment_text: "Yorum",
     comment_submit: "Gönder",
-    comment_empty: "Henüz yorum yok."
+    comment_empty: "Henüz yorum yok.",
+    filter_search: "Arama",
+    filter_search_placeholder: "Tarif, malzeme veya etiket",
+    filter_meal: "Öğün",
+    filter_cuisine: "Mutfak",
+    filter_diet: "Beslenme",
+    filter_category: "Kategori",
+    filter_time: "Süre",
+    filter_difficulty: "Zorluk",
+    filter_ingredient: "Malzeme",
+    filter_all: "Tümü",
+    filter_clear: "Sıfırla",
+    filter_results: "Sonuç"
   },
   sq: {
     titles: {
@@ -162,7 +186,181 @@ const I18N = {
     comment_rating: "Vlerësimi",
     comment_text: "Koment",
     comment_submit: "Dërgo",
-    comment_empty: "Ende pa komente."
+    comment_empty: "Ende pa komente.",
+    filter_search: "Kërko",
+    filter_search_placeholder: "Recetë, përbërës ose etiketë",
+    filter_meal: "Vakt",
+    filter_cuisine: "Kuzhina",
+    filter_diet: "Ushqyerje",
+    filter_category: "Kategori",
+    filter_time: "Koha",
+    filter_difficulty: "Vështirësi",
+    filter_ingredient: "Përbërës",
+    filter_all: "Të gjitha",
+    filter_clear: "Rivendos",
+    filter_results: "Rezultate"
+  }
+};
+
+const FILTER_LABELS = {
+  meal_type: {
+    de: {
+      drink: "Getränk",
+      main_dish: "Hauptgericht",
+      dessert: "Dessert",
+      snack: "Snack",
+      breakfast: "Frühstück",
+      lunch: "Mittagessen",
+      dinner: "Abendessen"
+    },
+    tr: {
+      drink: "İçecek",
+      main_dish: "Ana yemek",
+      dessert: "Tatlı",
+      snack: "Atıştırmalık",
+      breakfast: "Kahvaltı",
+      lunch: "Öğle",
+      dinner: "Akşam"
+    },
+    sq: {
+      drink: "Pije",
+      main_dish: "Pjatë kryesore",
+      dessert: "Ëmbëlsirë",
+      snack: "Meze",
+      breakfast: "Mëngjes",
+      lunch: "Drekë",
+      dinner: "Darkë"
+    }
+  },
+  diet: {
+    de: {
+      vegetarian: "Vegetarisch",
+      vegan: "Vegan",
+      gluten_free: "Glutenfrei",
+      lactose_free: "Laktosefrei",
+      low_carb: "Low Carb",
+      healthy: "Gesund",
+      omnivore: "Mit Fleisch"
+    },
+    tr: {
+      vegetarian: "Vejetaryen",
+      vegan: "Vegan",
+      gluten_free: "Glutensiz",
+      lactose_free: "Laktozsuz",
+      low_carb: "Düşük karbonhidrat",
+      healthy: "Sağlıklı",
+      omnivore: "Etli"
+    },
+    sq: {
+      vegetarian: "Vegjetarian",
+      vegan: "Vegan",
+      gluten_free: "Pa gluten",
+      lactose_free: "Pa laktozë",
+      low_carb: "Pak karbohidrate",
+      healthy: "E shëndetshme",
+      omnivore: "Me mish"
+    }
+  },
+  time_bucket: {
+    de: {
+      under_15: "Unter 15 Min",
+      under_30: "Unter 30 Min",
+      under_60: "Unter 60 Min",
+      over_60: "Über 60 Min"
+    },
+    tr: {
+      under_15: "15 dk altı",
+      under_30: "30 dk altı",
+      under_60: "60 dk altı",
+      over_60: "60 dk üzeri"
+    },
+    sq: {
+      under_15: "Nën 15 min",
+      under_30: "Nën 30 min",
+      under_60: "Nën 60 min",
+      over_60: "Mbi 60 min"
+    }
+  },
+  difficulty: {
+    de: { easy: "Einfach", medium: "Mittel", hard: "Schwierig" },
+    tr: { easy: "Kolay", medium: "Orta", hard: "Zor" },
+    sq: { easy: "Lehtë", medium: "Mesatare", hard: "Vështirë" }
+  },
+  cuisine: {
+    de: { italian: "Italienisch", international: "International", swiss: "Schweizerisch" },
+    tr: { italian: "İtalyan", international: "Uluslararası", swiss: "İsviçre" },
+    sq: { italian: "Italiane", international: "Ndërkombëtare", swiss: "Zvicerane" }
+  },
+  ingredient: {
+    de: {
+      mint: "Minze",
+      water: "Wasser",
+      honey: "Honig",
+      spring_onion: "Frühlingszwiebel",
+      bacon: "Speck",
+      vegetable_broth: "Gemüsebouillon",
+      risotto_rice: "Risottoreis",
+      peas: "Erbsen",
+      butter: "Butter",
+      almonds: "Mandeln",
+      sbrinz: "Sbrinz",
+      salt: "Salz",
+      pepper: "Pfeffer",
+      strawberries: "Erdbeeren",
+      burrata: "Burrata",
+      quark: "Quark",
+      creme_fraiche: "Crème fraîche",
+      vanilla: "Vanille",
+      powdered_sugar: "Puderzucker",
+      cream: "Rahm",
+      cantucci: "Cantucci"
+    },
+    tr: {
+      mint: "Nane",
+      water: "Su",
+      honey: "Bal",
+      spring_onion: "Taze soğan",
+      bacon: "Pastırma",
+      vegetable_broth: "Sebze suyu",
+      risotto_rice: "Risotto pirinci",
+      peas: "Bezelye",
+      butter: "Tereyağı",
+      almonds: "Badem",
+      sbrinz: "Sbrinz",
+      salt: "Tuz",
+      pepper: "Karabiber",
+      strawberries: "Çilek",
+      burrata: "Burrata",
+      quark: "Lor peyniri",
+      creme_fraiche: "Crème fraîche",
+      vanilla: "Vanilya",
+      powdered_sugar: "Pudra şekeri",
+      cream: "Krema",
+      cantucci: "Cantucci"
+    },
+    sq: {
+      mint: "Nenexhik",
+      water: "Ujë",
+      honey: "Mjaltë",
+      spring_onion: "Qepë e njomë",
+      bacon: "Proshutë",
+      vegetable_broth: "Lëng perimesh",
+      risotto_rice: "Oriz risoto",
+      peas: "Bizele",
+      butter: "Gjalpë",
+      almonds: "Bajame",
+      sbrinz: "Sbrinz",
+      salt: "Kripë",
+      pepper: "Piper",
+      strawberries: "Luleshtrydhe",
+      burrata: "Burrata",
+      quark: "Gjizë",
+      creme_fraiche: "Crème fraîche",
+      vanilla: "Vanilje",
+      powdered_sugar: "Sheqer pluhur",
+      cream: "Krem",
+      cantucci: "Cantucci"
+    }
   }
 };
 
@@ -320,6 +518,12 @@ function applyI18n() {
   nodes.forEach((node) => {
     const key = node.getAttribute("data-i18n");
     node.textContent = t(key);
+  });
+
+  const placeholders = document.querySelectorAll("[data-i18n-placeholder]");
+  placeholders.forEach((node) => {
+    const key = node.getAttribute("data-i18n-placeholder");
+    node.placeholder = t(key);
   });
 }
 
@@ -556,6 +760,145 @@ function renderRecipeList(recipes) {
   });
 }
 
+function formatFilterLabel(type, value) {
+  if (!value) return "";
+  if (type === "category") return labelCategory(value);
+  const map = FILTER_LABELS[type]?.[currentLang];
+  if (map && map[value]) return map[value];
+  const withSpaces = value.replace(/_/g, " ");
+  return withSpaces.replace(/\b\w/g, (letter) => letter.toUpperCase());
+}
+
+function uniqueValues(values) {
+  return [...new Set(values.filter(Boolean))].sort();
+}
+
+function getRecipeSearchText(recipe) {
+  const parts = [];
+  parts.push(localizeField(recipe.title));
+  parts.push(localizeField(recipe.summary));
+  const ing = localizeField(recipe.ingredients);
+  if (Array.isArray(ing)) parts.push(ing.join(" "));
+  if (Array.isArray(recipe.ingredients_core)) parts.push(recipe.ingredients_core.join(" "));
+  if (Array.isArray(recipe.categories)) parts.push(recipe.categories.join(" "));
+  if (Array.isArray(recipe.cuisine)) parts.push(recipe.cuisine.join(" "));
+  if (Array.isArray(recipe.diet)) parts.push(recipe.diet.join(" "));
+  if (recipe.meal_type) parts.push(recipe.meal_type);
+  return parts.filter(Boolean).join(" ").toLowerCase();
+}
+
+function setupRecipeFilters(recipes) {
+  const searchInput = document.getElementById("recipe-search");
+  const mealSelect = document.getElementById("filter-meal");
+  const cuisineSelect = document.getElementById("filter-cuisine");
+  const dietSelect = document.getElementById("filter-diet");
+  const categorySelect = document.getElementById("filter-category");
+  const timeSelect = document.getElementById("filter-time");
+  const difficultySelect = document.getElementById("filter-difficulty");
+  const ingredientSelect = document.getElementById("filter-ingredient");
+  const clearBtn = document.getElementById("filter-clear");
+  const countNode = document.getElementById("filter-count");
+  if (
+    !searchInput ||
+    !mealSelect ||
+    !cuisineSelect ||
+    !dietSelect ||
+    !categorySelect ||
+    !timeSelect ||
+    !difficultySelect ||
+    !ingredientSelect
+  ) {
+    renderRecipeList(recipes);
+    return;
+  }
+
+  const fillSelect = (select, values, type) => {
+    const allLabel = t("filter_all");
+    select.innerHTML = "";
+    const optAll = document.createElement("option");
+    optAll.value = "";
+    optAll.textContent = allLabel;
+    select.appendChild(optAll);
+    values.forEach((value) => {
+      const opt = document.createElement("option");
+      opt.value = value;
+      opt.textContent = formatFilterLabel(type, value);
+      select.appendChild(opt);
+    });
+  };
+
+  const mealValues = uniqueValues(recipes.map((r) => r.meal_type));
+  const cuisineValues = uniqueValues(recipes.flatMap((r) => r.cuisine || []));
+  const dietValues = uniqueValues(recipes.flatMap((r) => r.diet || []));
+  const categoryValues = uniqueValues(recipes.flatMap((r) => r.categories || []));
+  const timeValues = uniqueValues(recipes.map((r) => r.time_bucket));
+  const difficultyValues = uniqueValues(recipes.map((r) => r.difficulty));
+  const ingredientValues = uniqueValues(recipes.flatMap((r) => r.ingredients_core || []));
+
+  fillSelect(mealSelect, mealValues, "meal_type");
+  fillSelect(cuisineSelect, cuisineValues, "cuisine");
+  fillSelect(dietSelect, dietValues, "diet");
+  fillSelect(categorySelect, categoryValues, "category");
+  fillSelect(timeSelect, timeValues, "time_bucket");
+  fillSelect(difficultySelect, difficultyValues, "difficulty");
+  fillSelect(ingredientSelect, ingredientValues, "ingredient");
+
+  const update = () => {
+    const term = searchInput.value.trim().toLowerCase();
+    const meal = mealSelect.value;
+    const cuisine = cuisineSelect.value;
+    const diet = dietSelect.value;
+    const category = categorySelect.value;
+    const time = timeSelect.value;
+    const difficulty = difficultySelect.value;
+    const ingredient = ingredientSelect.value;
+
+    const filtered = recipes.filter((recipe) => {
+      if (meal && recipe.meal_type !== meal) return false;
+      if (cuisine && !(recipe.cuisine || []).includes(cuisine)) return false;
+      if (diet && !(recipe.diet || []).includes(diet)) return false;
+      if (category && !(recipe.categories || []).includes(category)) return false;
+      if (time && recipe.time_bucket !== time) return false;
+      if (difficulty && recipe.difficulty !== difficulty) return false;
+      if (ingredient && !(recipe.ingredients_core || []).includes(ingredient)) return false;
+      if (term) {
+        const haystack = getRecipeSearchText(recipe);
+        if (!haystack.includes(term)) return false;
+      }
+      return true;
+    });
+
+    renderRecipeList(filtered);
+    if (countNode) {
+      countNode.textContent = `${filtered.length} ${t("filter_results")}`;
+    }
+  };
+
+  searchInput.addEventListener("input", update);
+  mealSelect.addEventListener("change", update);
+  cuisineSelect.addEventListener("change", update);
+  dietSelect.addEventListener("change", update);
+  categorySelect.addEventListener("change", update);
+  timeSelect.addEventListener("change", update);
+  difficultySelect.addEventListener("change", update);
+  ingredientSelect.addEventListener("change", update);
+  if (clearBtn) {
+    clearBtn.addEventListener("click", () => {
+      searchInput.value = "";
+      mealSelect.value = "";
+      cuisineSelect.value = "";
+      dietSelect.value = "";
+      categorySelect.value = "";
+      timeSelect.value = "";
+      difficultySelect.value = "";
+      ingredientSelect.value = "";
+      update();
+    });
+  }
+
+  update();
+}
+
 function renderRecipeDetail(recipes) {
   const detail = document.getElementById("recipe-detail");
   if (!detail) return;
@@ -775,7 +1118,7 @@ async function initPage() {
   if (!list && !detail) return;
 
   const recipes = await loadRecipes();
-  renderRecipeList(recipes);
+  if (list) setupRecipeFilters(recipes);
   renderRecipeDetail(recipes);
 }
 

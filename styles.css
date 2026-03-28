@@ -160,11 +160,68 @@ footer {
   border-radius: 12px;
 }
 
+.button.ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--border);
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 16px;
   margin-top: 24px;
+}
+
+.filters {
+  margin: 18px 0 8px 0;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--panel);
+  display: grid;
+  gap: 12px;
+}
+
+.filter-row {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  align-items: end;
+}
+
+.filter-field {
+  display: grid;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.filter-field input,
+.filter-field select {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px;
+  font-family: inherit;
+  background: var(--card);
+  color: var(--ink);
+  width: 100%;
+}
+
+.filter-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.filters .button {
+  margin-top: 0;
+}
+
+.filter-count {
+  font-size: 12px;
+  color: var(--muted);
 }
 
 .card {

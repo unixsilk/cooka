@@ -14,6 +14,19 @@ const DEMO_RECIPES = [
     persons: 2,
     rating: 4.2,
     time_min: 10,
+    meal_type: "drink",
+    cuisine: ["international"],
+    diet: ["vegetarian"],
+    time_bucket: "under_15",
+    difficulty: "easy",
+    occasion: ["everyday"],
+    season: ["all_year"],
+    ingredients_core: ["mint", "water", "honey"],
+    ingredients_structured: [
+      { item: "Minze", quantity: 1, unit: "bundle", note: "", optional: false },
+      { item: "Wasser", quantity: 500, unit: "ml", note: "", optional: false },
+      { item: "Honig", quantity: 1.5, unit: "tsp", note: "1-2 TL", optional: true }
+    ],
     categories: ["drink", "vegetarian"],
     ingredients: {
       de: ["1 Bund Minze", "500 ml Wasser", "1-2 TL Honig"],
@@ -47,6 +60,37 @@ const DEMO_RECIPES = [
     },
     persons: 4,
     time_min: 30,
+    meal_type: "main_dish",
+    cuisine: ["italian"],
+    diet: ["omnivore"],
+    time_bucket: "under_30",
+    difficulty: "medium",
+    occasion: ["family"],
+    season: ["all_year"],
+    ingredients_core: [
+      "spring_onion",
+      "bacon",
+      "vegetable_broth",
+      "risotto_rice",
+      "peas",
+      "butter",
+      "almonds",
+      "sbrinz",
+      "salt",
+      "pepper"
+    ],
+    ingredients_structured: [
+      { item: "Frühlingszwiebel", quantity: 1, unit: "piece", note: "", optional: false },
+      { item: "Speckwürfeli", quantity: 60, unit: "g", note: "", optional: false },
+      { item: "Gemüsebouillon", quantity: 7, unit: "dl", note: "", optional: false },
+      { item: "Risotto-Reis", quantity: 150, unit: "g", note: "", optional: false },
+      { item: "Erbsen (aufgetaut)", quantity: 150, unit: "g", note: "", optional: false },
+      { item: "Butter", quantity: 1.5, unit: "tbsp", note: "", optional: false },
+      { item: "Mandelscheiben", quantity: 2, unit: "tbsp", note: "", optional: false },
+      { item: "Sbrinz", quantity: 30, unit: "g", note: "gerieben", optional: false },
+      { item: "Salz", quantity: null, unit: null, note: "", optional: true },
+      { item: "Pfeffer", quantity: null, unit: null, note: "", optional: true }
+    ],
     categories: ["main_dish"],
     ingredients: {
       de: [
@@ -130,6 +174,33 @@ const DEMO_RECIPES = [
     },
     persons: 6,
     time_min: 30,
+    meal_type: "dessert",
+    cuisine: ["international"],
+    diet: ["vegetarian"],
+    time_bucket: "under_30",
+    difficulty: "medium",
+    occasion: ["guests"],
+    season: ["spring", "summer"],
+    ingredients_core: [
+      "strawberries",
+      "burrata",
+      "quark",
+      "creme_fraiche",
+      "vanilla",
+      "powdered_sugar",
+      "cream",
+      "cantucci"
+    ],
+    ingredients_structured: [
+      { item: "Erdbeeren", quantity: 500, unit: "g", note: "", optional: false },
+      { item: "Burrata", quantity: 1, unit: "piece", note: "125 g", optional: false },
+      { item: "Magerquark", quantity: 250, unit: "g", note: "", optional: false },
+      { item: "Crème fraîche", quantity: 200, unit: "g", note: "", optional: false },
+      { item: "Vanilleschote", quantity: 1, unit: "piece", note: "", optional: false },
+      { item: "Puderzucker", quantity: 40, unit: "g", note: "", optional: false },
+      { item: "Rahm", quantity: 2, unit: "dl", note: "", optional: false },
+      { item: "Cantucci mit Mandeln", quantity: 150, unit: "g", note: "", optional: false }
+    ],
     categories: ["dessert", "vegetarian"],
     ingredients: {
       de: [

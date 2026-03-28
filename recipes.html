@@ -33,9 +33,9 @@
     <main class="content">
       <h1 class="page-title" data-i18n="recipes_title">Recipes</h1>
       <p class="muted" data-i18n="recipes_sub">Pick a recipe to view details.</p>
-      <section class="filters" id="recipe-filters">
-        <div class="filter-row">
-          <label class="filter-field">
+      <section class="filters is-collapsed" id="recipe-filters">
+        <div class="filters-head">
+          <label class="filter-field search-field">
             <span data-i18n="filter_search">Search</span>
             <input
               id="recipe-search"
@@ -44,6 +44,13 @@
               placeholder="Search recipes"
             />
           </label>
+          <div class="filters-head-actions">
+            <span class="filter-summary" id="filter-summary"></span>
+            <button class="filters-toggle" id="filter-toggle" type="button" data-i18n="filter_toggle">Filter</button>
+          </div>
+        </div>
+        <div class="filters-body" id="filters-body">
+          <div class="filter-row">
           <label class="filter-field">
             <span data-i18n="filter_meal">Meal</span>
             <select id="filter-meal"></select>
@@ -70,12 +77,19 @@
           </label>
           <label class="filter-field">
             <span data-i18n="filter_ingredient">Ingredient</span>
-            <select id="filter-ingredient"></select>
+            <input
+              id="filter-ingredient"
+              type="search"
+              data-i18n-placeholder="filter_ingredient_placeholder"
+              placeholder="z. B. Erdbeeren"
+            />
+            <div class="filter-suggest" id="ingredient-suggest" role="listbox" aria-label="Ingredient suggestions"></div>
           </label>
-        </div>
-        <div class="filter-actions">
+          </div>
+          <div class="filter-actions">
           <button class="button ghost" id="filter-clear" type="button" data-i18n="filter_clear">Clear</button>
           <span class="filter-count" id="filter-count"></span>
+          </div>
         </div>
       </section>
       <div id="recipe-list" class="grid"></div>

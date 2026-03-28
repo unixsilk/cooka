@@ -62,6 +62,9 @@ const I18N = {
     filter_time: "Zeit",
     filter_difficulty: "Schwierigkeit",
     filter_ingredient: "Zutat",
+    filter_ingredient_placeholder: "z. B. Erdbeeren",
+    filter_toggle: "Filter",
+    filter_active: "Aktive Filter",
     filter_all: "Alle",
     filter_clear: "Zurücksetzen",
     filter_results: "Ergebnisse"
@@ -129,6 +132,9 @@ const I18N = {
     filter_time: "Süre",
     filter_difficulty: "Zorluk",
     filter_ingredient: "Malzeme",
+    filter_ingredient_placeholder: "ör. çilek",
+    filter_toggle: "Filtreler",
+    filter_active: "Aktif filtre",
     filter_all: "Tümü",
     filter_clear: "Sıfırla",
     filter_results: "Sonuç"
@@ -196,6 +202,9 @@ const I18N = {
     filter_time: "Koha",
     filter_difficulty: "Vështirësi",
     filter_ingredient: "Përbërës",
+    filter_ingredient_placeholder: "p.sh. luleshtrydhe",
+    filter_toggle: "Filtra",
+    filter_active: "Filtra aktivë",
     filter_all: "Të gjitha",
     filter_clear: "Rivendos",
     filter_results: "Rezultate"
@@ -795,9 +804,13 @@ function setupRecipeFilters(recipes) {
   const categorySelect = document.getElementById("filter-category");
   const timeSelect = document.getElementById("filter-time");
   const difficultySelect = document.getElementById("filter-difficulty");
-  const ingredientSelect = document.getElementById("filter-ingredient");
+  const ingredientInput = document.getElementById("filter-ingredient");
+  const ingredientSuggest = document.getElementById("ingredient-suggest");
   const clearBtn = document.getElementById("filter-clear");
   const countNode = document.getElementById("filter-count");
+  const filterWrap = document.getElementById("recipe-filters");
+  const filterToggle = document.getElementById("filter-toggle");
+  const filterSummary = document.getElementById("filter-summary");
   if (
     !searchInput ||
     !mealSelect ||
@@ -806,7 +819,7 @@ function setupRecipeFilters(recipes) {
     !categorySelect ||
     !timeSelect ||
     !difficultySelect ||
-    !ingredientSelect
+    !ingredientInput
   ) {
     renderRecipeList(recipes);
     return;
@@ -841,7 +854,46 @@ function setupRecipeFilters(recipes) {
   fillSelect(categorySelect, categoryValues, "category");
   fillSelect(timeSelect, timeValues, "time_bucket");
   fillSelect(difficultySelect, difficultyValues, "difficulty");
-  fillSelect(ingredientSelect, ingredientValues, "ingredient");
+  const ingredientOptions = ingredientValues.map((value) => ({
+    value,
+    label: formatFilterLabel("ingredient", value)
+  }));
+
+  const renderSuggestions = (term) => {
+    if (!ingredientSuggest) return;
+    const query = term.trim().toLowerCase();
+    if (!query) {
+      ingredientSuggest.style.display = "none";
+      ingredientSuggest.innerHTML = "";
+      return;
+    }
+    const matches = ingredientOptions
+      .filter((opt) => {
+        const label = opt.label.toLowerCase();
+        const key = opt.value.replace(/_/g, " ").toLowerCase();
+        return label.includes(query) || key.includes(query);
+      })
+      .slice(0, 8);
+    if (matches.length === 0) {
+      ingredientSuggest.style.display = "none";
+      ingredientSuggest.innerHTML = "";
+      return;
+    }
+    ingredientSuggest.innerHTML = "";
+    matches.forEach((opt) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.textContent = opt.label;
+      btn.addEventListener("mousedown", (event) => {
+        event.preventDefault();
+        ingredientInput.value = opt.label;
+        ingredientSuggest.style.display = "none";
+        update();
+      });
+      ingredientSuggest.appendChild(btn);
+    });
+    ingredientSuggest.style.display = "grid";
+  };
 
   const update = () => {
     const term = searchInput.value.trim().toLowerCase();
@@ -851,7 +903,9 @@ function setupRecipeFilters(recipes) {
     const category = categorySelect.value;
     const time = timeSelect.value;
     const difficulty = difficultySelect.value;
-    const ingredient = ingredientSelect.value;
+    const ingredient = ingredientInput.value.trim().toLowerCase();
+    const activeCount = [meal, cuisine, diet, category, time, difficulty, ingredient].filter(Boolean)
+      .length;
 
     const filtered = recipes.filter((recipe) => {
       if (meal && recipe.meal_type !== meal) return false;
@@ -860,7 +914,19 @@ function setupRecipeFilters(recipes) {
       if (category && !(recipe.categories || []).includes(category)) return false;
       if (time && recipe.time_bucket !== time) return false;
       if (difficulty && recipe.difficulty !== difficulty) return false;
-      if (ingredient && !(recipe.ingredients_core || []).includes(ingredient)) return false;
+      if (ingredient) {
+        const core = (recipe.ingredients_core || []).map((value) => ({
+          label: formatFilterLabel("ingredient", value).toLowerCase(),
+          key: value.replace(/_/g, " ").toLowerCase()
+        }));
+        const localized = localizeField(recipe.ingredients);
+        const rawList = Array.isArray(localized) ? localized.join(" ").toLowerCase() : "";
+        const coreMatch = core.some(
+          (value) => value.label.includes(ingredient) || value.key.includes(ingredient)
+        );
+        const rawMatch = rawList.includes(ingredient);
+        if (!coreMatch && !rawMatch) return false;
+      }
       if (term) {
         const haystack = getRecipeSearchText(recipe);
         if (!haystack.includes(term)) return false;
@@ -872,6 +938,10 @@ function setupRecipeFilters(recipes) {
     if (countNode) {
       countNode.textContent = `${filtered.length} ${t("filter_results")}`;
     }
+    if (filterSummary) {
+      filterSummary.textContent =
+        activeCount > 0 ? `${activeCount} ${t("filter_active")}` : "";
+    }
   };
 
   searchInput.addEventListener("input", update);
@@ -881,7 +951,20 @@ function setupRecipeFilters(recipes) {
   categorySelect.addEventListener("change", update);
   timeSelect.addEventListener("change", update);
   difficultySelect.addEventListener("change", update);
-  ingredientSelect.addEventListener("change", update);
+  ingredientInput.addEventListener("input", () => {
+    renderSuggestions(ingredientInput.value);
+    update();
+  });
+  ingredientInput.addEventListener("focus", () => {
+    renderSuggestions(ingredientInput.value);
+  });
+  ingredientInput.addEventListener("blur", () => {
+    if (ingredientSuggest) {
+      window.setTimeout(() => {
+        ingredientSuggest.style.display = "none";
+      }, 100);
+    }
+  });
   if (clearBtn) {
     clearBtn.addEventListener("click", () => {
       searchInput.value = "";
@@ -891,8 +974,20 @@ function setupRecipeFilters(recipes) {
       categorySelect.value = "";
       timeSelect.value = "";
       difficultySelect.value = "";
-      ingredientSelect.value = "";
+      ingredientInput.value = "";
       update();
+    });
+  }
+
+  if (filterWrap && filterToggle) {
+    const setCollapsed = (collapsed) => {
+      filterWrap.classList.toggle("is-collapsed", collapsed);
+      filterToggle.setAttribute("aria-expanded", String(!collapsed));
+    };
+    setCollapsed(true);
+    filterToggle.addEventListener("click", () => {
+      const next = !filterWrap.classList.contains("is-collapsed");
+      setCollapsed(next);
     });
   }
 

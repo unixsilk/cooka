@@ -183,6 +183,49 @@ footer {
   gap: 12px;
 }
 
+.filters-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.filters-head .search-field {
+  flex: 1;
+  min-width: 240px;
+}
+
+.filters-head-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+}
+
+.filters-toggle {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--ink);
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.filter-summary {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.filters-body {
+  display: grid;
+  gap: 12px;
+}
+
+.filters.is-collapsed .filters-body {
+  display: none;
+}
+
 .filter-row {
   display: grid;
   gap: 12px;
@@ -195,6 +238,7 @@ footer {
   gap: 6px;
   font-size: 13px;
   color: var(--muted);
+  position: relative;
 }
 
 .filter-field input,
@@ -222,6 +266,39 @@ footer {
 .filter-count {
   font-size: 12px;
   color: var(--muted);
+}
+
+.filter-suggest {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 6px;
+  display: none;
+  z-index: 5;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.filter-suggest button {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  color: var(--ink);
+  padding: 6px 8px;
+  border-radius: 8px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.filter-suggest button:hover,
+.filter-suggest button:focus {
+  background: var(--panel);
+  outline: none;
 }
 
 .card {

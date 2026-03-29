@@ -67,7 +67,8 @@ const I18N = {
     filter_active: "Aktive Filter",
     filter_all: "Alle",
     filter_clear: "Zurücksetzen",
-    filter_results: "Ergebnisse"
+    filter_results: "Ergebnisse",
+    video_title: "Video"
   },
   tr: {
     titles: {
@@ -137,7 +138,8 @@ const I18N = {
     filter_active: "Aktif filtre",
     filter_all: "Tümü",
     filter_clear: "Sıfırla",
-    filter_results: "Sonuç"
+    filter_results: "Sonuç",
+    video_title: "Video"
   },
   sq: {
     titles: {
@@ -207,7 +209,8 @@ const I18N = {
     filter_active: "Filtra aktivë",
     filter_all: "Të gjitha",
     filter_clear: "Rivendos",
-    filter_results: "Rezultate"
+    filter_results: "Rezultate",
+    video_title: "Video"
   }
 };
 
@@ -305,6 +308,7 @@ const FILTER_LABELS = {
       mint: "Minze",
       water: "Wasser",
       honey: "Honig",
+      zucchini: "Zucchetti",
       spring_onion: "Frühlingszwiebel",
       bacon: "Speck",
       vegetable_broth: "Gemüsebouillon",
@@ -315,6 +319,9 @@ const FILTER_LABELS = {
       sbrinz: "Sbrinz",
       salt: "Salz",
       pepper: "Pfeffer",
+      eggs: "Eier",
+      boiled_eggs: "Gekochte Eier",
+      flour: "Mehl",
       strawberries: "Erdbeeren",
       burrata: "Burrata",
       quark: "Quark",
@@ -328,6 +335,7 @@ const FILTER_LABELS = {
       mint: "Nane",
       water: "Su",
       honey: "Bal",
+      zucchini: "Kabak",
       spring_onion: "Taze soğan",
       bacon: "Pastırma",
       vegetable_broth: "Sebze suyu",
@@ -338,6 +346,9 @@ const FILTER_LABELS = {
       sbrinz: "Sbrinz",
       salt: "Tuz",
       pepper: "Karabiber",
+      eggs: "Yumurta",
+      boiled_eggs: "Haşlanmış yumurta",
+      flour: "Un",
       strawberries: "Çilek",
       burrata: "Burrata",
       quark: "Lor peyniri",
@@ -351,6 +362,7 @@ const FILTER_LABELS = {
       mint: "Nenexhik",
       water: "Ujë",
       honey: "Mjaltë",
+      zucchini: "Kungulleshkë",
       spring_onion: "Qepë e njomë",
       bacon: "Proshutë",
       vegetable_broth: "Lëng perimesh",
@@ -361,6 +373,9 @@ const FILTER_LABELS = {
       sbrinz: "Sbrinz",
       salt: "Kripë",
       pepper: "Piper",
+      eggs: "Vezë",
+      boiled_eggs: "Vezë të ziera",
+      flour: "Miell",
       strawberries: "Luleshtrydhe",
       burrata: "Burrata",
       quark: "Gjizë",
@@ -372,6 +387,31 @@ const FILTER_LABELS = {
     }
   }
 };
+
+function getVideoEmbedUrl(url) {
+  if (!url) return "";
+  try {
+    const parsed = new URL(url);
+    if (parsed.hostname.includes("youtu.be")) {
+      const id = parsed.pathname.replace("/", "");
+      return id ? `https://www.youtube.com/embed/${id}` : url;
+    }
+    if (parsed.hostname.includes("youtube.com")) {
+      const id = parsed.searchParams.get("v");
+      return id ? `https://www.youtube.com/embed/${id}` : url;
+    }
+    if (parsed.hostname.includes("tiktok.com")) {
+      const parts = parsed.pathname.split("/").filter(Boolean);
+      const idx = parts.indexOf("video");
+      if (idx !== -1 && parts[idx + 1]) {
+        return `https://www.tiktok.com/player/v1/${parts[idx + 1]}`;
+      }
+    }
+  } catch {
+    return url;
+  }
+  return url;
+}
 
 let currentLang = "de";
 const THEMES = [
@@ -636,7 +676,9 @@ function labelCategory(cat) {
     dessert: { de: "Dessert", tr: "Tatlı", sq: "Ëmbëlsirë" },
     breakfast: { de: "Frühstück", tr: "Kahvaltı", sq: "Mëngjes" },
     salad: { de: "Salat", tr: "Salata", sq: "Sallatë" },
-    soup: { de: "Suppe", tr: "Çorba", sq: "Supë" }
+    soup: { de: "Suppe", tr: "Çorba", sq: "Supë" },
+    fingerfood: { de: "Fingerfood", tr: "Fingerfood", sq: "Fingerfood" },
+    baking: { de: "Backen", tr: "Fırın", sq: "Pjekje" }
   };
   return map[cat]?.[currentLang] || cat;
 }
@@ -743,11 +785,9 @@ function renderRecipeList(recipes) {
     card.appendChild(title);
 
     const summary = document.createElement("p");
-    summary.textContent = localizeField(recipe.summary);
-    card.appendChild(summary);
 
     const meta = document.createElement("p");
-    meta.className = "muted";
+    meta.className = "muted meta";
     meta.textContent = recipe.time_min
       ? `${t("time_prefix")}${recipe.time_min}${t("time_suffix")}`
       : "";
@@ -755,7 +795,7 @@ function renderRecipeList(recipes) {
 
     if (recipe.persons || recipe.rating) {
       const sub = document.createElement("p");
-      sub.className = "muted";
+      sub.className = "muted meta-sub";
       const persons = recipe.persons ? `${t("persons_label")}: ${recipe.persons}` : "";
       const rating = recipe.rating ? `${t("rating_label")}: ${formatRating(recipe.rating)}` : "";
       sub.textContent = [persons, rating].filter(Boolean).join(" · ");
@@ -1014,10 +1054,39 @@ function renderRecipeDetail(recipes) {
     const wrap = document.createElement("div");
     wrap.className = "image-ambilight";
     wrap.style.setProperty("--glow-url", `url("${recipe.image_url}")`);
-    const img = document.createElement("img");
-    img.src = recipe.image_url;
-    img.alt = localizeField(recipe.title);
-    wrap.appendChild(img);
+
+    if (recipe.video_url) {
+      const poster = document.createElement("button");
+      poster.type = "button";
+      poster.className = "video-poster";
+      const img = document.createElement("img");
+      img.src = recipe.image_url;
+      img.alt = localizeField(recipe.title);
+      const badge = document.createElement("span");
+      badge.className = "play-badge";
+      badge.setAttribute("aria-hidden", "true");
+      badge.textContent = "▶";
+      poster.append(img, badge);
+      poster.addEventListener("click", () => {
+        const iframe = document.createElement("iframe");
+        iframe.src = getVideoEmbedUrl(recipe.video_url);
+        iframe.title = t("video_title");
+        iframe.setAttribute("allowfullscreen", "");
+        iframe.setAttribute("loading", "lazy");
+        iframe.setAttribute(
+          "allow",
+          "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        );
+        poster.replaceWith(iframe);
+      });
+      wrap.appendChild(poster);
+    } else {
+      const img = document.createElement("img");
+      img.src = recipe.image_url;
+      img.alt = localizeField(recipe.title);
+      wrap.appendChild(img);
+    }
+
     detail.appendChild(wrap);
   }
 
@@ -1028,6 +1097,13 @@ function renderRecipeDetail(recipes) {
   const summary = document.createElement("p");
   summary.textContent = localizeField(recipe.summary);
   detail.appendChild(summary);
+
+  if (recipe.video_url) {
+    const note = document.createElement("p");
+    note.className = "muted";
+    note.textContent = t("video_title");
+    detail.appendChild(note);
+  }
 
   const meta = document.createElement("p");
   meta.className = "muted";

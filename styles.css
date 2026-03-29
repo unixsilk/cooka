@@ -241,6 +241,13 @@ footer {
   position: relative;
 }
 
+.filters-head .search-field span {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: 0.2px;
+}
+
 .filter-field input,
 .filter-field select {
   border: 1px solid var(--border);
@@ -340,6 +347,8 @@ footer {
   flex-direction: column;
   gap: 4px;
   cursor: pointer;
+  height: 300px;
+  overflow: hidden;
 }
 
 .recipe-card:hover h2 {
@@ -348,9 +357,30 @@ footer {
 
 .recipe-card img {
   width: 100%;
-  height: 70px;
+  height: 72px;
   object-fit: cover;
   border-radius: 10px;
+}
+
+.recipe-card h2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 0;
+  margin: 6px 0 2px 0;
+}
+
+
+.recipe-card .meta,
+.recipe-card .meta-sub {
+  font-size: 13px;
+  margin: 2px 0;
+}
+
+.recipe-card .tags {
+  margin-top: auto;
+  min-height: 28px;
 }
 
 .image-ambilight {
@@ -388,6 +418,42 @@ footer {
   object-fit: cover;
   border-radius: 10px;
   margin-bottom: 12px;
+}
+
+.video-poster {
+  position: relative;
+  border: none;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.video-poster img {
+  width: 100%;
+  max-height: 280px;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+}
+
+.play-badge {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 28px;
+  color: #fff;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+  background: linear-gradient(0deg, rgba(0,0,0,0.25), rgba(0,0,0,0.05));
+  border-radius: 10px;
+}
+
+.image-ambilight iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: none;
+  border-radius: 10px;
+  background: #000;
 }
 
 .note {

@@ -266,5 +266,191 @@ const DEMO_RECIPES = [
     },
     source_name: "MiGusto",
     source_url: "https://migusto.migros.ch/de/rezepte/erdbeer-trifle"
+  },
+  {
+    id: "7",
+    title: {
+      de: "Zucchetti-Speck-Tartelettes mit Ei",
+      tr: "Yumurta ile kabaklı pastırmalı tarteletler",
+      sq: "Tarteletta me kungulleshkë, proshutë dhe vezë"
+    },
+    summary: {
+      de: "Mit Salat als kleine Mahlzeit oder als Party-Fingerfood erfreuen die Tartelettes mit Zucchetti, Speck und Ei nicht nur den Gaumen, sondern auch das Auge.",
+      tr: "Salatayla küçük bir öğün ya da parti fingerfood olarak, kabak, pastırma ve yumurtalı tarteletler hem göze hem damağa hitap eder.",
+      sq: "Me sallatë si vakt i lehtë ose fingerfood për festa, tartelettat me kungulleshkë, proshutë dhe vezë kënaqin si shijen ashtu edhe syrin."
+    },
+    persons: 8,
+    time_min: 85,
+    meal_type: "main_dish",
+    cuisine: ["swiss"],
+    diet: ["omnivore"],
+    time_bucket: "over_60",
+    difficulty: "medium",
+    occasion: ["guests"],
+    season: ["spring", "summer"],
+    ingredients_core: [
+      "zucchini",
+      "bacon",
+      "eggs",
+      "cream",
+      "salt",
+      "pepper",
+      "butter",
+      "flour",
+      "water",
+      "boiled_eggs"
+    ],
+    ingredients_structured: [
+      { item: "Zucchetti", quantity: 500, unit: "g", note: "klein", optional: false },
+      { item: "Bratspecktranchen", quantity: 200, unit: "g", note: "", optional: false },
+      { item: "Eier", quantity: 3, unit: "piece", note: "", optional: false },
+      { item: "Halbrahm", quantity: 2, unit: "dl", note: "", optional: false },
+      { item: "Salz", quantity: null, unit: null, note: "", optional: true },
+      { item: "Pfeffer", quantity: null, unit: null, note: "", optional: true },
+      { item: "Gekochte Eier", quantity: 4, unit: "piece", note: "", optional: false },
+      { item: "Butter", quantity: 50, unit: "g", note: "kalt", optional: false },
+      { item: "Halbweissmehl", quantity: 250, unit: "g", note: "", optional: false },
+      { item: "Ei", quantity: 1, unit: "piece", note: "", optional: false },
+      { item: "Wasser", quantity: 0.5, unit: "dl", note: "", optional: false },
+      { item: "Salz", quantity: 0.5, unit: "tsp", note: "", optional: false }
+    ],
+    categories: ["main_dish", "fingerfood", "baking"],
+    ingredients: {
+      de: [
+        "Für 8 Förmchen à ca. 11 cm Ø",
+        "500 g kleine Zucchetti",
+        "Butter und Mehl für die Förmchen",
+        "200 g Bratspecktranchen",
+        "3 Eier",
+        "2 dl Halbrahm",
+        "Salz",
+        "Pfeffer",
+        "4 gekochte Eier",
+        "Teig:",
+        "50 g Butter, kalt",
+        "250 g Halbweissmehl",
+        "1 Ei",
+        "0,5 dl Wasser",
+        "1/2 TL Salz"
+      ],
+      tr: [
+        "8 kalıp (yaklaşık 11 cm) için",
+        "500 g küçük kabak",
+        "Kalıplar için tereyağı ve un",
+        "200 g pastırma",
+        "3 yumurta",
+        "2 dl krema (yarım yağlı)",
+        "Tuz",
+        "Karabiber",
+        "4 haşlanmış yumurta",
+        "Hamur:",
+        "50 g tereyağı, soğuk",
+        "250 g beyaz un",
+        "1 yumurta",
+        "0,5 dl su",
+        "1/2 TK tuz"
+      ],
+      sq: [
+        "Për 8 forma (rreth 11 cm)",
+        "500 g kungulleshkë të vogla",
+        "Gjalpë dhe miell për format",
+        "200 g proshutë",
+        "3 vezë",
+        "2 dl krem (gjysmë yndyre)",
+        "Kripë",
+        "Piper",
+        "4 vezë të ziera",
+        "Brumë:",
+        "50 g gjalpë, i ftohtë",
+        "250 g miell i bardhë",
+        "1 vezë",
+        "0,5 dl ujë",
+        "1/2 lugë çaji kripë"
+      ]
+    },
+    nutrition: {
+      kcal: 420,
+      protein_g: 18,
+      carbs_g: 25,
+      fat_g: 27
+    },
+    image_url: "https://images.unsplash.com/photo-1523986371872-9d3ba2e2f642?auto=format&fit=crop&w=900&q=80",
+    video_url: "https://www.youtube.com/watch?v=",
+    steps: {
+      de: [
+        "Für den Teig Butter würfeln und mit Mehl verreiben. Ei, Wasser und Salz zugeben, rasch zu einem Teig formen und ca. 30 Minuten kühl stellen.",
+        "Backofen auf 180 °C Ober-/Unterhitze vorheizen. Zucchetti längs in dünne Streifen hobeln.",
+        "Förmchen buttern und mehlen. Teig in 8 Stücke teilen, zu Rondellen auswallen und in die Förmchen legen.",
+        "Boden und Rand etwas andrücken, Zucchetti und Speck spiralförmig einsetzen.",
+        "Eier und Rahm verquirlen, mit Salz und Pfeffer würzen.",
+        "Je ca. 4 EL Guss in die Förmchen geben und ca. 35 Minuten backen.",
+        "Tartelettes aus den Förmchen lösen, gekochte Eier halbieren, anrichten und servieren."
+      ],
+      tr: [
+        "Hamur için tereyağını küp doğrayıp unla ovun. Yumurta, su ve tuzu ekleyip hızlıca hamur yapın, 30 dk soğutun.",
+        "Fırını 180 °C alt‑üst ısıtın. Kabakları uzun ince şeritler halinde dilimleyin.",
+        "Kalıpları yağlayıp unlayın. Hamuru 8 parçaya bölüp açın ve kalıplara yerleştirin.",
+        "Tabanı ve kenarları bastırın, kabak ve pastırmayı spiral şekilde dizin.",
+        "Yumurta ve kremayı çırpıp tuz‑karabiberle tatlandırın.",
+        "Her kalıba yaklaşık 4 YK karışım dökün ve 35 dk pişirin.",
+        "Tarteletleri çıkarın, haşlanmış yumurtaları ikiye bölüp servis edin."
+      ],
+      sq: [
+        "Për brumin, prite gjalpin në kube dhe fërkoje me miellin. Shto vezën, ujin dhe kripën, formo shpejt brumin dhe ftohe 30 min.",
+        "Ngroh furrën në 180 °C sipër/poshtë. Prij kungulleshkët në shirita të hollë.",
+        "Lyji format me gjalpë dhe miell. Ndaje brumin në 8 pjesë, hape dhe vendose në forma.",
+        "Shtyp lehtë bazën dhe anët, vendos kungulleshkat dhe proshutën në spiral.",
+        "Rrih vezët me kremin dhe rregullo me kripë e piper.",
+        "Hidhu rreth 4 lugë gjelle përzierje në çdo formë dhe piq për 35 min.",
+        "Nxirr tartelettat, përgjysmo vezët e ziera dhe shërbe."
+      ]
+    },
+    source_name: "MiGusto",
+    source_url: "https://migusto.migros.ch/de/rezepte/zucchetti-speck-tartelettes-mit-ei"
+  },
+  {
+    id: "8",
+    title: {
+      de: "TikTok Rezept",
+      tr: "TikTok Tarifi",
+      sq: "Recetë TikTok"
+    },
+    summary: {
+      de: "TikTok-Video von @kookmutsjes.",
+      tr: "@kookmutsjes TikTok videosu.",
+      sq: "Video TikTok nga @kookmutsjes."
+    },
+    persons: 2,
+    time_min: 15,
+    meal_type: "snack",
+    cuisine: ["international"],
+    diet: ["omnivore"],
+    time_bucket: "under_15",
+    difficulty: "easy",
+    occasion: ["everyday"],
+    season: ["all_year"],
+    ingredients_core: [],
+    ingredients_structured: [],
+    categories: ["snack"],
+    ingredients: {
+      de: [],
+      tr: [],
+      sq: []
+    },
+    nutrition: {
+      kcal: 0,
+      protein_g: 0,
+      carbs_g: 0,
+      fat_g: 0
+    },
+    image_url: "https://images.unsplash.com/photo-1523986371872-9d3ba2e2f642?auto=format&fit=crop&w=900&q=80",
+    video_url: "https://www.tiktok.com/@kookmutsjes/video/7597834018301791510",
+    steps: {
+      de: ["Siehe Video."],
+      tr: ["Videoya bakın."],
+      sq: ["Shih videon."]
+    },
+    source_name: "TikTok",
+    source_url: "https://www.tiktok.com/@kookmutsjes/video/7597834018301791510"
   }
 ];
